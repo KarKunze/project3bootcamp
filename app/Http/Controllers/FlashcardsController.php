@@ -52,27 +52,28 @@ class FlashcardsController extends Controller
         ]);
 
         $flashcard = new \App\Flashcard;
-        $flashcard->term = $request->input('flashcardName');
+        $flashcard->term = $request->input('flashcardTerm');
         $flashcard->description = $request->input('flashcardDescription');
+        $flashcard->user_id = \Auth::user()->id;
         $flashcard->save();
-        $request->session()->flash('status', 'Flashcard created!');
-        return redirect()->route('flashcards.index');
+        // $request->session()->flash('status', 'Flashcard created!');
+        return redirect()->route('cards.index');
     }
-    //
+
     // public function update(Request $request, $id)
     // {
     //
-    //   $validatedData = $request->validate([
-    //       'flashcardTerm' => 'required|unique:flashcards,term',
-    //       'flashcardDescription' => 'required',
-    //   ]);
+    //     $validatedData = $request->validate([
+    //         'flashcardTerm' => 'required|unique:flashcards,term',
+    //         'flashcardDescription' => 'required',
+    //     ]);
     //
-    //   $flashcard = new \App\Flashcard;
-    //   $flashcard->term = $request->input('flashcardName');
-    //   $flashcard->description = $request->input('flashcardDescription');
-    //   $flashcard->save();
-    //   $request->session()->flash('status', 'Flashcard created!');
-    //   return redirect()->route('flashcards.index');
+    //     $flashcard = new \App\Flashcard;
+    //     $flashcard->term = $request->input('flashcardName');
+    //     $flashcard->description = $request->input('flashcardDescription');
+    //     $flashcard->save();
+    //     $request->session()->flash('status', 'Flashcard created!');
+    //     return redirect()->route('flashcards.index');
     // }
     //
     // public function destroy(Request $request, $id)

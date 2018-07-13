@@ -19,4 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('cards', 'FlashcardsController@index')->name('cards');
+Route::resource('/cards', 'FlashcardsController');
+
+Route::resource('/flashcards', 'FlashcardController');
+
+Route::get('/flashcards', function() {
+	$groups = \App\Flashcard::orderBy('term')->get();
+	return view('flashcards.index', compact('flashcards'));
+});

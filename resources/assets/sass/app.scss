@@ -12,3 +12,20 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.container {
+  max-width: 600px;;
+}
+
+.card {
+  max-width: 400px;
+  margin-left: 100px;
+}
+
+.card-header {
+  text-align: center;
+}
+
+.description {
+  // display: none;
+}

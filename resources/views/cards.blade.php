@@ -1,34 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                  <h4>Term</h4>
-                </div>
-                <div class="card-body">
-                  <p>description/definition</p>
-                </div>
-            </div>
-        </div>
-    </div>
-<br>
-<br>
 
-<form>
+
+<div class="container">
+
+<form method="post" action="/cards">
+  @csrf
+
   <div class="form-group">
     <label for="term">Term</label>
-    <input type="text" class="form-control" id="term" aria-describedby="term" placeholder="New term">
+    <input type="text" class="form-control" name="flashcardTerm" id="term" placeholder="New term">
   </div>
   <div class="form-group">
     <label for="description">Description/Definition</label>
-    <input type="text" class="form-control" id="description" placeholder="New description/definition">
+    <input type="text" class="form-control" id="description" name="flashcardDescription" placeholder="New description/definition">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <br>
+<br>
+
+
+<div class="row">
+  @foreach ($flashcards as $flashcard)
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+              <a class="nav-link term" href="#">{{ $flashcard->term }}</a>
+              <button type="button" class="btn-sm btn-primary" data-toggle="collapse" data-target="#div{{ $flashcard->id }}">Show definition</button>
+              <!-- <h4>{{ $flashcard->term }}</h4> -->
+            </div>
+            <div class="card-body description collapse" id="div{{ $flashcard->id }}">
+              <p>{{ $flashcard->description }}</p>
+            </div>
+        </div>
+    </div>
+      @endforeach
+</div>
+<!-- <br>
 <br>
     <table class="table">
       <thead>
@@ -46,7 +56,7 @@
           </tr>
 @endforeach
         </tbody>
-    </table>
+    </table> -->
 
 </div>
 @endsection
