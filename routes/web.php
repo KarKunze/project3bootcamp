@@ -27,3 +27,7 @@ Route::get('/flashcards', function() {
 	$groups = \App\Flashcard::orderBy('term')->get();
 	return view('flashcards.index', compact('flashcards'));
 });
+
+Route::get('/edit', function () {
+    return view('edit');
+});
