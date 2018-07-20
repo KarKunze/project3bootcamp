@@ -47494,7 +47494,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             index: 0,
-            currentIndex: 0
+            currentIndex: 0,
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
     },
     mounted: function mounted() {
@@ -47590,7 +47591,7 @@ var render = function() {
                           "a",
                           {
                             staticClass: "btn btn-secondary btn-sm",
-                            attrs: { href: "/cards/" + flashcard.id + "edit" }
+                            attrs: { href: "/cards/" + flashcard.id + "/edit" }
                           },
                           [_vm._v("edit")]
                         )

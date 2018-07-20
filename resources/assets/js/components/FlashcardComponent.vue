@@ -19,7 +19,7 @@
                     <p>{{ flashcard.description }}</p>
                     <div class="row justify-content-between">
                         <div class="col-auto">
-                            <a :href="'/cards/' + flashcard.id + 'edit'" class="btn btn-secondary btn-sm">edit</a>
+                            <a :href="'/cards/' + flashcard.id + '/edit'" class="btn btn-secondary btn-sm">edit</a>
                         </div>
                         <div class="col-auto">
                             <form :action="'/cards/' + flashcard.id" method="post">
@@ -46,6 +46,7 @@ export default {
             return {
                 index: 0,
                 currentIndex: 0,
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
 
