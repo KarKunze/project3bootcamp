@@ -15,8 +15,8 @@ class CreateFlashcardsTable extends Migration
     {
         Schema::create('flashcards', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedinteger('creator_id');
+            $table->foreign('creator_id')->references('id')->on('users');
             $table->string('term');
             $table->string('description');
             $table->timestamps();

@@ -6,11 +6,7 @@ use Illuminate\Http\Request;
 
 class FlashcardsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,15 +19,18 @@ class FlashcardsController extends Controller
      */
     public function index()
     {
-      $flashcards = \App\Flashcard::all();
+      $flashcards = \App\Flashcard::orderBy('term')->where('creator_id', '=', auth()->user()->id)->get();
       return view('cards', compact('flashcards'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    // public function show()
+    // {
+    //     $flashcards = \App\Flashcard::orderBy('term')->where('creator_id', '=', auth()->user()->id)->get();
+    //     return view('cards', compact('flashcards'));
+    // }
+
+
     public function create()
     {
         //
@@ -47,14 +46,14 @@ class FlashcardsController extends Controller
     {
 
         $validatedData = $request->validate([
-            'flashcardTerm' => 'required|unique:flashcards,term',
+            'flashcardTerm' => 'required',
             'flashcardDescription' => 'required',
         ]);
 
         $flashcard = new \App\Flashcard;
         $flashcard->term = $request->input('flashcardTerm');
         $flashcard->description = $request->input('flashcardDescription');
-        $flashcard->user_id = \Auth::user()->id;
+        $flashcard->creator_id = \Auth::user()->id;
         $flashcard->save();
         // $request->session()->flash('status', 'Flashcard created!');
         return redirect()->route('cards.index');
@@ -64,68 +63,23 @@ class FlashcardsController extends Controller
     // {
     //
     //     $validatedData = $request->validate([
-    //         'flashcardTerm' => 'required|unique:flashcards,term',
+    //         'flashcardTerm' => 'required',
     //         'flashcardDescription' => 'required',
     //     ]);
     //
     //     $flashcard = new \App\Flashcard;
-    //     $flashcard->term = $request->input('flashcardName');
+    //     $flashcard->term = $request->input('flashcardTerm');
     //     $flashcard->description = $request->input('flashcardDescription');
     //     $flashcard->save();
     //     $request->session()->flash('status', 'Flashcard created!');
-    //     return redirect()->route('flashcards.index');
-    // }
-    //
-    // public function destroy(Request $request, $id)
-    // {
-    //     \App\Flashcard::destroy($id);
-    //     $request->session()->flash('status', 'Flashcard deleted!');
-    //     return redirect()->route('flashcards.index');
+    //     return redirect()->route('cards.index');
     // }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {
-
+        $card=\App\Flashcard::find($id);
+        $card->delete();
+        $request->session()->flash('status', 'Flashcard deleted!');
+        return redirect()->route('cards.index');
     }
 }

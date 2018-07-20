@@ -33,6 +33,14 @@
             </div>
             <div class="card-body description collapse" id="div{{ $flashcard->id }}">
               <p>{{ $flashcard->description }}</p>
+              <button class="btn btn-secondary btn-sm">edit</button>
+
+              <form action="/cards/{{ $flashcard->id }}" method="post">
+                @method('DELETE')
+                @csrf
+                <button class="btn btn-secondary btn-sm" type="submit">delete</button>
+              </form>
+
             </div>
         </div>
     </div>
