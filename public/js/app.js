@@ -13892,6 +13892,7 @@ window.Vue = __webpack_require__(36);
  */
 
 Vue.component('example-component', __webpack_require__(39));
+Vue.component('flashcard-component', __webpack_require__(48));
 
 var app = new Vue({
   el: '#app'
@@ -47399,6 +47400,233 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = __webpack_require__(49)
+/* template */
+var __vue_template__ = __webpack_require__(50)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/FlashcardComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7a2371d4", Component.options)
+  } else {
+    hotAPI.reload("data-v-7a2371d4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['flashcardsData'],
+    data: function data() {
+        return {
+            searchString: '',
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+    },
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    },
+
+    computed: {
+        filteredFlashcards: function filteredFlashcards() {
+            var flashcards_array = this.flashcardsData;
+            var search_string = this.searchString.toLowerCase();
+            if (!search_string) {
+                return flashcards_array;
+            }
+            flashcards_array = flashcards_array.filter(function (item) {
+                if (item.name.toLowerCase().indexOf(search_string) !== -1) {
+                    return item;
+                }
+            });
+            return flashcards_array;
+        }
+    }
+});
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-10" },
+        _vm._l(_vm.filteredFlashcards, function(flashcard) {
+          return _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _c("a", { staticClass: "nav-link term", attrs: { href: "#" } }, [
+                _vm._v(_vm._s(flashcard.term))
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn-sm btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "collapse",
+                    "data-target": "#div" + flashcard.id
+                  }
+                },
+                [_vm._v("Show definition")]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "card-body description collapse",
+                attrs: { id: "#div" + flashcard.id }
+              },
+              [
+                _c("p", [_vm._v(_vm._s(flashcard.description))]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row justify-content-between" }, [
+                  _c("div", { staticClass: "col-auto" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-secondary btn-sm",
+                        attrs: { href: "/cards/" + flashcard.id + "edit" }
+                      },
+                      [_vm._v("edit")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-auto" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: {
+                          action: "/cards/" + flashcard.id,
+                          method: "post"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: { type: "hidden", name: "_token" },
+                          domProps: { value: _vm.csrf }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: {
+                            type: "hidden",
+                            name: "_method",
+                            value: "DELETE"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-secondary btn-sm",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("delete")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ])
+        })
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7a2371d4", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

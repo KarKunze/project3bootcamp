@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('make')
 
 
 <div class="container">
@@ -20,8 +20,20 @@
 </form>
 <br>
 <br>
+@endsection
 
 
+
+@section('flash')
+<flashcard-component :flashcards-data='{{ $flashcards->toJson() }}'></flashcard-component>
+@endsection
+
+
+
+
+@section('content')
+<br>
+<br>
 <div class="row">
   @foreach ($flashcards as $flashcard)
     <div class="col-md-10">

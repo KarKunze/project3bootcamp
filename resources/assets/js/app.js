@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('flashcard-component', require('./components/FlashcardComponent.vue'));
 
 const app = new Vue({
     el: '#app'
