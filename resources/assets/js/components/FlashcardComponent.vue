@@ -61,8 +61,7 @@ export default {
     methods: {
 
       nextCard: function() {
-        if (this.currentIndex<this.flashcardsData.length-1)
-        this.currentIndex++
+        this.currentIndex = (this.currentIndex+1) % this.flashcardsData.length;
       },
 
       prevCard: function() {
