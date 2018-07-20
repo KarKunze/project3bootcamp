@@ -33,20 +33,26 @@
             </div>
             <div class="card-body description collapse" id="div{{ $flashcard->id }}">
               <p>{{ $flashcard->description }}</p>
-
+              <div class="row justify-content-between">
+                <div class="col-auto">
               <a href="/cards/{{ $flashcard->id }}/edit" class="btn btn-secondary btn-sm">edit</a>
-
+            </div>
+            <div class="col-auto">
               <form action="/cards/{{ $flashcard->id }}" method="post">
                 @method('DELETE')
                 @csrf
                 <button class="btn btn-secondary btn-sm" type="submit">delete</button>
               </form>
+            </div>
+            </div>
 
             </div>
         </div>
     </div>
       @endforeach
 </div>
+
+
 <!-- <br>
 <br>
     <table class="table">
