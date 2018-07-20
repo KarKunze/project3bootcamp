@@ -72,9 +72,11 @@
         </nav>
 
         <main class="py-4">
-            @yield('make')
-            @yield('flash')
-            @yield('content')
+          <div class=container>
+          <div>  @yield('make') </div>
+          <div>    @yield('flash') </div>
+          <div>    @yield('content') </div>
+          </div>
         </main>
     </div>
 </body>

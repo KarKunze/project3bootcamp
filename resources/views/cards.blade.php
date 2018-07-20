@@ -34,6 +34,8 @@
 @section('content')
 <br>
 <br>
+<br>
+<br>
 <div class="row">
   @foreach ($flashcards as $flashcard)
     <div class="col-md-10">

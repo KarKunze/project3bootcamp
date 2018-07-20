@@ -47490,34 +47490,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['flashcardsData'],
+
     data: function data() {
         return {
-            searchString: '',
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            index: 0,
+            currentIndex: 0
         };
     },
     mounted: function mounted() {
         console.log('Component mounted.');
     },
 
-    computed: {
-        filteredFlashcards: function filteredFlashcards() {
-            var flashcards_array = this.flashcardsData;
-            var search_string = this.searchString.toLowerCase();
-            if (!search_string) {
-                return flashcards_array;
-            }
-            flashcards_array = flashcards_array.filter(function (item) {
-                if (item.name.toLowerCase().indexOf(search_string) !== -1) {
-                    return item;
-                }
-            });
-            return flashcards_array;
+
+    computed: {},
+
+    methods: {
+
+        nextCard: function nextCard() {
+            if (this.currentIndex < this.flashcardsData.length - 1) this.currentIndex++;
+        },
+
+        prevCard: function prevCard() {
+            if (this.currentIndex > 0) this.currentIndex--;
         }
+
     }
+
 });
 
 /***/ }),
@@ -47532,87 +47540,111 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        { staticClass: "col-md-10" },
-        _vm._l(_vm.filteredFlashcards, function(flashcard) {
-          return _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _c("a", { staticClass: "nav-link term", attrs: { href: "#" } }, [
-                _vm._v(_vm._s(flashcard.term))
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn-sm btn-primary",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "collapse",
-                    "data-target": "#div" + flashcard.id
-                  }
-                },
-                [_vm._v("Show definition")]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "card-body description collapse",
-                attrs: { id: "#div" + flashcard.id }
-              },
-              [
-                _c("p", [_vm._v(_vm._s(flashcard.description))]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row justify-content-between" }, [
-                  _c("div", { staticClass: "col-auto" }, [
+        { staticClass: "col-auto" },
+        _vm._l(_vm.flashcardsData, function(flashcard, index) {
+          return index == _vm.currentIndex
+            ? _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "col-auto" }, [
+                  _c("div", { staticClass: "row justify-content-between" }, [
                     _c(
-                      "a",
+                      "button",
                       {
                         staticClass: "btn btn-secondary btn-sm",
-                        attrs: { href: "/cards/" + flashcard.id + "edit" }
-                      },
-                      [_vm._v("edit")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-auto" }, [
-                    _c(
-                      "form",
-                      {
-                        attrs: {
-                          action: "/cards/" + flashcard.id,
-                          method: "post"
+                        staticStyle: { "margin-left": "15px" },
+                        on: {
+                          click: function($event) {
+                            _vm.prevCard(index)
+                          }
                         }
                       },
-                      [
-                        _c("input", {
-                          attrs: { type: "hidden", name: "_token" },
-                          domProps: { value: _vm.csrf }
-                        }),
-                        _vm._v(" "),
-                        _c("input", {
-                          attrs: {
-                            type: "hidden",
-                            name: "_method",
-                            value: "DELETE"
+                      [_vm._v(" < ")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary btn-sm",
+                          on: {
+                            click: function($event) {
+                              _vm.nextCard(index)
+                            }
                           }
-                        }),
-                        _vm._v(" "),
+                        },
+                        [_vm._v(" > ")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-header" }, [
+                  _c(
+                    "h5",
+                    { staticClass: "nav-link term", attrs: { href: "#" } },
+                    [_vm._v(_vm._s(flashcard.term))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-body",
+                    attrs: { id: "this" + flashcard.id }
+                  },
+                  [
+                    _c("p", [_vm._v(_vm._s(flashcard.description))]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row justify-content-between" }, [
+                      _c("div", { staticClass: "col-auto" }, [
                         _c(
-                          "button",
+                          "a",
                           {
                             staticClass: "btn btn-secondary btn-sm",
-                            attrs: { type: "submit" }
+                            attrs: { href: "/cards/" + flashcard.id + "edit" }
                           },
-                          [_vm._v("delete")]
+                          [_vm._v("edit")]
                         )
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-auto" }, [
+                        _c(
+                          "form",
+                          {
+                            attrs: {
+                              action: "/cards/" + flashcard.id,
+                              method: "post"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: { type: "hidden", name: "_token" },
+                              domProps: { value: _vm.csrf }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "_method",
+                                value: "DELETE"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-secondary btn-sm",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("delete")]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e()
         })
       )
     ])
