@@ -4,7 +4,7 @@
 
 
 <div class="container">
-
+  <br>
 <form method="post" action="/cards">
   @csrf
 
@@ -18,6 +18,7 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<br>
 <br>
 <br>
 @endsection

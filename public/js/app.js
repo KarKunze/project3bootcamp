@@ -47485,8 +47485,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['flashcardsData'],
@@ -47527,118 +47525,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-auto" },
-        _vm._l(_vm.flashcardsData, function(flashcard, index) {
-          return index == _vm.currentIndex
-            ? _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "col-auto" }, [
-                  _c("div", { staticClass: "row justify-content-between" }, [
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col-auto" },
+      _vm._l(_vm.flashcardsData, function(flashcard, index) {
+        return index == _vm.currentIndex
+          ? _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", { staticClass: "row justify-content-between" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-sm",
+                      staticStyle: { "margin-left": "15px" },
+                      on: {
+                        click: function($event) {
+                          _vm.prevCard(index)
+                        }
+                      }
+                    },
+                    [_vm._v(" < ")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-auto" }, [
                     _c(
                       "button",
                       {
                         staticClass: "btn btn-secondary btn-sm",
-                        staticStyle: { "margin-left": "15px" },
                         on: {
                           click: function($event) {
-                            _vm.prevCard(index)
+                            _vm.nextCard(index)
                           }
                         }
                       },
-                      [_vm._v(" < ")]
-                    ),
+                      [_vm._v(" > ")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-header" }, [
+                _c(
+                  "h5",
+                  { staticClass: "nav-link term", attrs: { href: "#" } },
+                  [_vm._v(_vm._s(flashcard.term))]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "card-body",
+                  attrs: { id: "this" + flashcard.id }
+                },
+                [
+                  _c("p", [_vm._v(_vm._s(flashcard.description))]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row justify-content-between" }, [
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-secondary btn-sm",
+                          attrs: { href: "/cards/" + flashcard.id + "/edit" }
+                        },
+                        [_vm._v("edit")]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-auto" }, [
                       _c(
-                        "button",
+                        "form",
                         {
-                          staticClass: "btn btn-secondary btn-sm",
-                          on: {
-                            click: function($event) {
-                              _vm.nextCard(index)
-                            }
+                          attrs: {
+                            action: "/cards/" + flashcard.id,
+                            method: "post"
                           }
                         },
-                        [_vm._v(" > ")]
+                        [
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: _vm.csrf }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_method",
+                              value: "DELETE"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary btn-sm",
+                              attrs: { type: "submit" }
+                            },
+                            [_vm._v("delete")]
+                          )
+                        ]
                       )
                     ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-header" }, [
-                  _c(
-                    "h5",
-                    { staticClass: "nav-link term", attrs: { href: "#" } },
-                    [_vm._v(_vm._s(flashcard.term))]
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-body",
-                    attrs: { id: "this" + flashcard.id }
-                  },
-                  [
-                    _c("p", [_vm._v(_vm._s(flashcard.description))]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row justify-content-between" }, [
-                      _c("div", { staticClass: "col-auto" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-secondary btn-sm",
-                            attrs: { href: "/cards/" + flashcard.id + "/edit" }
-                          },
-                          [_vm._v("edit")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-auto" }, [
-                        _c(
-                          "form",
-                          {
-                            attrs: {
-                              action: "/cards/" + flashcard.id,
-                              method: "post"
-                            }
-                          },
-                          [
-                            _c("input", {
-                              attrs: { type: "hidden", name: "_token" },
-                              domProps: { value: _vm.csrf }
-                            }),
-                            _vm._v(" "),
-                            _c("input", {
-                              attrs: {
-                                type: "hidden",
-                                name: "_method",
-                                value: "DELETE"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-secondary btn-sm",
-                                attrs: { type: "submit" }
-                              },
-                              [_vm._v("delete")]
-                            )
-                          ]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ])
-            : _vm._e()
-        })
-      )
-    ])
+                ]
+              )
+            ])
+          : _vm._e()
+      })
+    )
   ])
 }
 var staticRenderFns = []

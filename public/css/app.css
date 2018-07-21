@@ -10480,7 +10480,7 @@ a.text-dark:focus {
 }
 
 .card {
-  max-width: 400px;
+  width: 400px;
   margin-left: 100px;
   text-align: center;
   padding-top: 2px;
